@@ -1,0 +1,11 @@
+[color]
+	ui = auto
+[core]
+	autocrlf = input
+	excludesfile = <%= File.join ENV['HOME'], '.gitignore' %>
+[github]
+	user = <%= print 'github.user: '; STDOUT.flush; STDIN.gets.chomp %>
+	token = <%= print 'github.token: '; STDOUT.flush; STDIN.gets.chomp %>
+[user]
+	name = <%= print 'user.name: '; STDOUT.flush; STDIN.gets.chomp %>
+	email = <%= print 'user.email: '; STDOUT.flush; STDIN.gets.chomp %>
