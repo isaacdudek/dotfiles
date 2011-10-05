@@ -1,5 +1,5 @@
 export CLICOLOR="true"
-export PATH="$HOME/.rbenv/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 
 eval "$(rbenv init -)"
 
