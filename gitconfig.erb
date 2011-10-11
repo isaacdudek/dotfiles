@@ -1,17 +1,21 @@
 [alias]
 	a = add
+	b = branch
 	c = commit
 	ca = commit --amend
 	ch = checkout
 	chb = checkout -b
+	co = config
 	d = diff
 	ds = diff --staged
 	f = fetch
 	l = log
-	m = mv
+	m = merge
 	p = push
 	pl = pull
 	r = rebase
+	rs = reset
+	rsh = reset HEAD
 	s = status
 [color]
 	ui = auto
@@ -21,6 +25,8 @@
 [github]
 	user = <%= print 'github.user: '; STDOUT.flush; STDIN.gets.chomp %>
 	token = <%= print 'github.token: '; STDOUT.flush; STDIN.gets.chomp %>
+[merge]
+	ff = false
 [user]
 	name = <%= print 'user.name: '; STDOUT.flush; STDIN.gets.chomp %>
 	email = <%= print 'user.email: '; STDOUT.flush; STDIN.gets.chomp %>
