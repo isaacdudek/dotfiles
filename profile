@@ -9,9 +9,11 @@ function git_branch {
 
 export PS1="\w\033[1m\033[32m\$(git_branch)\033[0m : "
 
+alias a="amazebot"
 alias b="bundle"
 alias be="bundle exec"
 alias g="git"
+alias ge="gem"
 alias h="heroku"
 alias i="irb"
 alias r="rails"
@@ -19,3 +21,4 @@ alias ra="rake"
 alias rb="rbenv"
 alias rsp="rspec"
 alias ru="ruby"
+alias t="touch"
