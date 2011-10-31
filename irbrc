@@ -82,9 +82,8 @@ begin
   require 'hirb'
 
   extend Hirb::Console
+
   Hirb.enable pager: false
 rescue LoadError => e
   puts "Couldn't load Hirb: #{e}"
 end
-
-ActiveRecord::Base.logger = Logger.new(STDOUT) if defined?(Rails)
