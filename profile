@@ -1,13 +1,16 @@
 export CLICOLOR="true"
+export GIT_PS1_SHOWDIRTYSTATE="true"
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 
 eval "$(rbenv init -)"
 
+[[ -e /usr/local/etc/bash_completion.d/git-completion.bash ]] && source /usr/local/etc/bash_completion.d/git-completion.bash
+
 function git_branch {
-  git branch --no-color 2> /dev/null | sed "s/\* \([a-zA-Z0-9_-]*\)/ [\1]/"
+  echo $(__git_ps1) | sed "s/(\(.*\))/ [\1]/"
 }
 
-export PS1="\w\033[1m\033[32m\$(git_branch)\033[0m : "
+export PS1="\w\[\e[1m\]\[\e[32m\]\$(git_branch)\[\e[0m\] : "
 
 alias a="amazebot"
 alias b="bundle"
