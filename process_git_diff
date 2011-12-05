@@ -8,8 +8,7 @@ GRAY ||= "\e[37m"
 input = $_
 
 process ||= false
-process = true if input =~ /^#{COLOR_CODE_REGEXP}?@@/
-process = false if input =~ /^#{COLOR_CODE_REGEXP}?diff --git/
+process = false if input =~ /^#{COLOR_CODE_REGEXP}?(diff --git|@@)/
 
 output = if process
   input.gsub! /(?<=.)#{COLOR_CODE_REGEXP}/, ''
@@ -23,3 +22,5 @@ else
 end
 
 print output
+
+process = true if input =~ /^#{COLOR_CODE_REGEXP}?@@/
