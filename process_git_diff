@@ -1,14 +1,23 @@
 #!/usr/bin/env ruby -n
 
-ANSI_ESCAPE_SEQUENCE_REGEXP ||= /\e\[\d{0,2}m/
+COLOR_CODE_REGEXP ||= /\e\[\d{0,2}m/
+
+RESET ||= "\e[0m"
+GRAY ||= "\e[37m"
 
 input = $_
 
 process ||= false
-process = true if input =~ /^#{ANSI_ESCAPE_SEQUENCE_REGEXP}?diff --git/
+process = true if input =~ /^#{COLOR_CODE_REGEXP}?@@/
+process = false if input =~ /^#{COLOR_CODE_REGEXP}?diff --git/
 
 output = if process
-  input
+  input.gsub! /(?<=.)#{COLOR_CODE_REGEXP}/, ''
+
+  spaces = input.match(/^#{COLOR_CODE_REGEXP}?[ +-]?( *)/).captures.first
+  spaces_prefix = "#{GRAY}#{spaces.size == 0 ? '  ' : '%2d' % spaces.size}#{RESET}|"
+
+  "#{spaces_prefix}#{input}#{RESET}"
 else
   input
 end
