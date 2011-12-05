@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby -n
+
+input = $_
+
+output = input
+
+print output
