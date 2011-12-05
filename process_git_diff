@@ -1,9 +1,11 @@
 #!/usr/bin/env ruby -n
 
+ANSI_ESCAPE_SEQUENCE_REGEXP ||= /\e\[\d{0,2}m/
+
 input = $_
 
 process ||= false
-process = true if input.start_with?('diff --git')
+process = true if input =~ /^#{ANSI_ESCAPE_SEQUENCE_REGEXP}?diff --git/
 
 output = if process
   input

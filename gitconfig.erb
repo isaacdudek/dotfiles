@@ -6,8 +6,8 @@
 	ch = checkout
 	chb = checkout -b
 	co = config
-	d = !bash -c 'git diff $@ | <%= File.join ENV['HOME'], '.process_git_diff' %>' -
-	ds = !bash -c 'git diff --staged $@ | <%= File.join ENV['HOME'], '.process_git_diff' %>' -
+	d = !bash -c 'git diff --color $@ | <%= File.join ENV['HOME'], '.process_git_diff' %>' -
+	ds = !bash -c 'git diff --color --staged $@ | <%= File.join ENV['HOME'], '.process_git_diff' %>' -
 	f = fetch
 	l = log
 	m = merge
@@ -17,7 +17,7 @@
 	rs = reset
 	rsh = reset HEAD
 	s = status
-	sh = !bash -c 'git show $@ | <%= File.join ENV['HOME'], '.process_git_diff' %>' -
+	sh = !bash -c 'git show --color $@ | <%= File.join ENV['HOME'], '.process_git_diff' %>' -
 [color]
 	ui = auto
 [core]
