@@ -22,14 +22,18 @@ output = if process
 
   line_prefix, line_content = input.match(/^(#{COLOR_CODE_REGEXP}?[ +-]? *)(.*\n)$/).captures
 
-  line_prefix.gsub! /(#{spaces})/, "#{WARNING}\\1#{RESET_BACKGROUND}" if spaces.size.odd?
+  deletion = line_prefix.match(/^#{COLOR_CODE_REGEXP}?([ +-]?)/).captures.first == '-'
 
-  [
-    /( {2,})/,
-    /(,[^ \n])/,
-    /({ | })/
-  ].each do |regexp|
-    line_content.gsub! regexp, "#{WARNING}\\1#{RESET_BACKGROUND}"
+  unless deletion
+    line_prefix.gsub! /(#{spaces})/, "#{WARNING}\\1#{RESET_BACKGROUND}" if spaces.size.odd?
+
+    [
+      /( {2,})/,
+      /(,[^ \n])/,
+      /({ | })/
+    ].each do |regexp|
+      line_content.gsub! regexp, "#{WARNING}\\1#{RESET_BACKGROUND}"
+    end
   end
 
   "#{spaces_prefix}#{line_prefix}#{line_content}#{RESET_ALL}"
