@@ -10,7 +10,7 @@ function git_branch {
   echo $(__git_ps1) | sed "s/(\(.*\))/ [\1]/"
 }
 
-export PS1="\w\e[1;32m$(git_branch)\e[0m : "
+export PS1="\w\[\e[1;32m\]\$(git_branch)\[\e[0m\] : "
 
 alias a="amazebot"
 alias b="bundle"
