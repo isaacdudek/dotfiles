@@ -18,6 +18,7 @@
 	rsh = reset HEAD
 	s = status
 	sh = !bash -c 'git show --color $@ | <%= File.join ENV['HOME'], '.process_git_diff' %>' -
+	st = stash
 [color]
 	ui = auto
 [core]
@@ -26,8 +27,6 @@
 [github]
 	user = <%= print 'github.user: '; STDOUT.flush; STDIN.gets.chomp %>
 	token = <%= print 'github.token: '; STDOUT.flush; STDIN.gets.chomp %>
-[merge]
-	ff = false
 [user]
 	name = <%= print 'user.name: '; STDOUT.flush; STDIN.gets.chomp %>
 	email = <%= print 'user.email: '; STDOUT.flush; STDIN.gets.chomp %>
