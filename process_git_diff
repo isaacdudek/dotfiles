@@ -12,13 +12,17 @@ WARNING ||= "\e[101m"
 input = $_
 
 process ||= false
-process = false if input =~ /^#{COLOR_CODE_REGEXP}?(diff --git|@@)/
+previous_blank_line ||= nil
+previous_spaces_size ||= nil
+
+if input =~ /^#{COLOR_CODE_REGEXP}?(diff --git|@@)/
+  process = false
+  previous_blank_line = nil
+  previous_spaces_size = nil
+end
 
 output = if process
   input.gsub! /(?<!^)#{COLOR_CODE_REGEXP}/, ''
-
-  previous_blank_line ||= nil
-  previous_spaces_size ||= nil
 
   spaces = input.match(/^#{COLOR_CODE_REGEXP}?[ +-]?( *)/).captures.first
   spaces_prefix = "#{GRAY}#{spaces.size == 0 ? '  ' : '%2d' % spaces.size}#{RESET_TEXT}|"
@@ -28,7 +32,11 @@ output = if process
   deletion = line_prefix.match(/^#{COLOR_CODE_REGEXP}?([ +-]?)/).captures.first == '-'
 
   unless deletion
-    if spaces.size.odd? || previous_spaces_size && !previous_blank_line && spaces.size - previous_spaces_size > 2
+    if previous_blank_line && line_content.chomp.empty?
+      line_prefix << "#{WARNING}#{' ' * 140}#{RESET_BACKGROUND}"
+    end
+
+    if spaces.size.odd? || !previous_blank_line && previous_spaces_size && spaces.size - previous_spaces_size > 2
       line_prefix.gsub! /([ +-]?)(#{spaces})/, "\\1#{WARNING}\\2#{RESET_BACKGROUND}"
     end
 
