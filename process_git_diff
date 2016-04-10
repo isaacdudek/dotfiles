@@ -45,7 +45,8 @@ output = if process
       /(,[^ \n])/,
       /([({\[] | [\]})])/,
       /( +)$/,
-      /^(\\ No newline at end of file)$/
+      /^(\\ No newline at end of file)$/,
+      /(TODO)/
     ].each do |regexp|
       line_content.gsub! regexp, "#{WARNING}\\1#{RESET_BACKGROUND}"
     end
